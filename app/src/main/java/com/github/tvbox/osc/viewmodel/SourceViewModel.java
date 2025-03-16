@@ -32,6 +32,7 @@ import com.lzy.okgo.model.Response;
 import com.orhanobut.hawk.Hawk;
 import com.thoughtworks.xstream.XStream;
 import com.thoughtworks.xstream.io.xml.DomDriver;
+import io.github.pixee.security.xstream.HardeningConverter;
 
 import org.greenrobot.eventbus.EventBus;
 import org.json.JSONObject;
@@ -577,6 +578,7 @@ public class SourceViewModel extends ViewModel {
     private AbsSortXml sortXml(MutableLiveData<AbsSortXml> result, String xml) {
         try {
             XStream xstream = new XStream(new DomDriver());//创建Xstram对象
+            xstream.registerConverter(new HardeningConverter());
             xstream.autodetectAnnotations(true);
             xstream.processAnnotations(AbsSortXml.class);
             xstream.ignoreUnknownElements();
@@ -673,6 +675,7 @@ public class SourceViewModel extends ViewModel {
     private AbsXml xml(MutableLiveData<AbsXml> result, String xml, String sourceKey) {
         try {
             XStream xstream = new XStream(new DomDriver());//创建Xstram对象
+            xstream.registerConverter(new HardeningConverter());
             xstream.autodetectAnnotations(true);
             xstream.processAnnotations(AbsXml.class);
             xstream.ignoreUnknownElements();
